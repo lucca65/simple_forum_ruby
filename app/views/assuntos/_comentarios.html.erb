@@ -1,0 +1,30 @@
+<% if comentarios.any? %>
+  <% comentarios.each do |comentario| %>
+    <div style="margin-left: 25px">
+      
+      <blockquote style="">
+        <div class="row">
+          <div class="col-xs-10">
+            <p><small><%= comentario.resposta %></small></p>
+          </div>
+
+          <div class="col-xs-2">
+            <%= link_to 'Comentar', {
+              controller: 'comentarios', 
+              action: 'new', 
+              parent_id: comentario.id,
+              subcomentario: true,
+              remote:true },
+              class: 'btn btn-info btn-xs' %>
+          </div>
+        </div>
+      </blockquote>
+      <div id="comentario_<%= comentario.id %>"></div>
+      <% if comentario.comentarios.any? %>
+        <%= render 'comentarios', comentarios: comentario.comentarios, parent_id: comentario.id  %>
+      <% end %>
+    </div>
+
+    
+  <% end %>
+<% end %>

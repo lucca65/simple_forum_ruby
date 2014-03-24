@@ -1,0 +1,8 @@
+<div class="alert alert-info">
+	<%= form_for @comentario, url: { action: "create"} do |c| %>
+		<%= c.text_area :resposta, autofocus: true, class: 'form-control' %>
+		<%= hidden_field_tag :parent_id, @parent_id %>
+		<%= hidden_field_tag :subcomentario, @subcomentario %>
+		<%= c.submit "Reply", class: 'btn btn-success', style: 'margin-top: 10px'%>
+	<% end %>
+</div>

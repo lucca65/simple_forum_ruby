@@ -1,0 +1,53 @@
+<div class="row">
+  <div class="col-xs-6">
+    <h1>Listando Assuntos</h1>
+  </div>
+  <div class="col-xs-6 ">
+    <%= link_to 'Novo assunto', new_assunto_path, class: 'btn btn-success pull-right', style: 'margin-top: 20px' %>
+  </div>
+</div>
+
+<% if flash[:notice] %>
+  <div class="alert alert-success">
+    <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+    <%= flash[:notice] %>
+  </div>    
+<% end %>
+
+<table class="table">
+  <thead>
+    <tr>
+      <th>Assunto</th>
+      <th>Texto</th>
+      <th>Comentar</th>
+      <th>Data Criação</th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @assuntos.each do |assunto| %>
+      <tr>
+        <td><%= assunto.assunto %></td>
+        <td>
+          <div class="lead">
+            <%= assunto.texto %>
+          </div> 
+          <div id="comentario_<%= assunto.id %>"></div>
+          <%= render 'comentarios', comentarios: assunto.comentarios, parent_id: assunto.id  %>
+        </td>
+        <td>
+            <%= link_to 'Comentar', {
+            controller: 'comentarios', 
+            action: 'new', 
+            parent_id: assunto.id, 
+            subcomentario: false,
+            remote: true }, 
+            :class => 'btn btn-info btn-sm' %>
+        </td>
+        <td><%= assunto.data_criacao.strftime('%d/%m/%y %H:%M:%S') %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<%= paginate @assuntos %>
