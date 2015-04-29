@@ -1,11 +1,9 @@
 R7::Application.routes.draw do
 
   root 'assuntos#index'
-  
+
   resources :products
   resources :assuntos
-  
-  get '/comentarios/new_sub' => 'comentarios#new_sub'
 
   resources :comentarios
 

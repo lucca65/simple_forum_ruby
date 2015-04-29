@@ -55,7 +55,7 @@ class ComentariosController < ApplicationController
 			puts 'mudando palavra...' + palavra
 			regex = Regexp.new /#{palavra}/i
 			# Brute force para substituições mais comuns -- to sem tempo :|
-			texto.gsub!(regex, "*" * palavra.length) 
+			texto.gsub!(regex, "*" * palavra.length)
 		end
 	end
 
